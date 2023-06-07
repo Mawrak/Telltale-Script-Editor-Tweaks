@@ -13,7 +13,9 @@ If you're looking for scripting documentation, check out the [Script Editor Wiki
 # How do I edit source code
 
 You will need Node.js, Electron and Electron Forge.
+
 For running and building the project from source code start from here: https://www.electronforge.io
+
 You may need to disable antivirus when installing dependencies.
 
 # Limitations
