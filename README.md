@@ -2,7 +2,7 @@
 
 [![Github All Releases](https://img.shields.io/github/downloads/Telltale-Modding-Group/Telltale-Script-Editor/total.svg?style=for-the-badge&color=blueviolet)](https://github.com/Telltale-Modding-Group/Telltale-Script-Editor/releases)
 
-Original tool by droyti: https://github.com/Telltale-Modding-Group/Telltale-Script-Editor
+Original tool by Violet (droyti): https://github.com/Telltale-Modding-Group/Telltale-Script-Editor
 
 An experimental script editor for Telltale games, written using Electron.
 
@@ -25,8 +25,9 @@ You may need to disable antivirus when installing dependencies.
 
 ![Editor Window](/marketing/scripteditor.png?raw=true)
 
-# Special Thanks
+# Credits
 
-Thanks to [Lightning](https://twitter.com/nekoblitz_) for designing the program icon.
-
-Thanks to [Ben O](https://github.com/bigbeno37) for taking the lead on the Electron rewrite.
+Original tool was developed by:
+[Violet](https://github.com/droyti)
+[Lightning](https://twitter.com/nekoblitz_)
+[Ben O](https://github.com/bigbeno37)
