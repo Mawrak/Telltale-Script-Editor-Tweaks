@@ -13,6 +13,8 @@ export const SettingsModal = ({context, id}: ContextModalProps) => {
 	const maximumBuildsToKeep = useAppSelector(state => state.storage.maximumBuildsToKeep);
 	const saveFilesOnBuild = useAppSelector(state => state.storage.saveFilesOnBuild);
 	const selectedTheme = useAppSelector(state => state.storage.selectedTheme);
+    //Mawrak Tweaks - new setting - Mod Folder
+    const modBuildPath2 = useAppSelector(state => state.storage.modBuildPath);
 
 	const handleFolderClicked = async () => {
 		dispatch(OverlayActions.show());
@@ -23,6 +25,19 @@ export const SettingsModal = ({context, id}: ContextModalProps) => {
 
 		dispatch(OverlayActions.hide());
 	};
+    
+    //const handleFolderClickedModPath = async () => {
+	//	dispatch(OverlayActions.show());
+
+	//	const modBuildPath = await MainProcess.getGamePath();
+
+	//	if (modBuildPath) dispatch(StorageActions.setModPath(modBuildPath));
+
+	//	dispatch(OverlayActions.hide());
+	//};
+    
+    
+    
 
 	return <Container>
 		<Stack>
@@ -34,6 +49,13 @@ export const SettingsModal = ({context, id}: ContextModalProps) => {
 				value={gameExePath}
 				onChange={e => dispatch(StorageActions.setGamePath(e.target.value))}
 				rightSection={<ActionIcon onClick={handleFolderClicked} color="dark"><AiOutlineFolder /></ActionIcon>}
+			/>
+            <TextInput
+				required
+				label="Mod folder path. Enter full path only, for build-and-run, should be located somewhere in root directory of the game. Example: Z:\TWDTTDS\My_Mod_Folder. Defaults to TWDTTDS\Archives folder if left empty."
+				placeholder="!!Archives!!"
+				value={modBuildPath2}
+				onChange={e => dispatch(StorageActions.setModPath(e.target.value))}
 			/>
 			<NumberInput
 				required

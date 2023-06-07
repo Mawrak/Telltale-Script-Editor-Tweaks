@@ -9,6 +9,7 @@ import {setSelectedTheme} from '../renderer';
 interface StorageState {
 	initialised: boolean,
 	gamePath?: string,
+    modBuildPath?: string,
 	sidebarWidth: number,
 	recentProjects: RecentProject[],
 	maximumBuildsToKeep: number,
@@ -33,6 +34,11 @@ export const StorageSlice = createSlice({
 		setGamePath: (state, {payload}: PayloadAction<string | undefined>) => {
 			state.gamePath = payload
 		},
+        //Mawrak Tweaks - new setting - Mod Folder
+        setModPath: (state, {payload}: PayloadAction<string | undefined>) => {
+			state.modBuildPath = payload
+		},
+        
 		setSidebarWidth: (state, {payload}: PayloadAction<number>) => {
 			state.sidebarWidth = Math.round(Math.max(payload, initialState.sidebarWidth));
 		},

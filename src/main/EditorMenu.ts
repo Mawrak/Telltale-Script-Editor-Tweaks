@@ -9,9 +9,13 @@ import {
 	MenuNotImplementedChannel,
 	MenuOpenProjectChannel,
 	MenuProjectSettingsChannel,
-	MenuSettingsChannel
+	MenuSettingsChannel,
+    SaveFileChannel
 } from '../shared/Channels';
 import {AppState} from '../shared/types';
+
+
+
 
 export const updateEditorMenu = (window: BrowserWindow, state: Readonly<AppState>): void =>
 	window.setMenu(getEditorMenu(window, state));
@@ -22,6 +26,11 @@ export const getEditorMenu = (window: BrowserWindow, state: Readonly<AppState>) 
 	// TODO: Remove once everything is good to go
 	const notImplemented = () => MenuNotImplementedChannel(source).send();
 
+    
+
+    
+    
+    
 	const projectOpen = !!state.project.currentProject;
 
 	const ProjectMenu = {
@@ -45,7 +54,7 @@ export const getEditorMenu = (window: BrowserWindow, state: Readonly<AppState>) 
 			}
 		]
 	};
-
+    //Mawrak Tweaks - removing unused menu buttons (notImplemented ones)
 	const FileSubmenu = [
 		{
 			label: 'New',
@@ -53,12 +62,12 @@ export const getEditorMenu = (window: BrowserWindow, state: Readonly<AppState>) 
 				{
 					label: 'Project',
 					click: () => MenuNewProjectChannel(source).send()
-				},
-				conditional(projectOpen,
-				{
-					label: 'Script',
-					click: notImplemented
-				})
+				}//,
+				//conditional(projectOpen,
+				//{
+				//	label: 'Script',
+				//	click: notImplemented
+				//})
 			].filter(item => item)
 		},
 		{
@@ -67,21 +76,26 @@ export const getEditorMenu = (window: BrowserWindow, state: Readonly<AppState>) 
 				{
 					label: 'Project',
 					click: () => MenuOpenProjectChannel(source).send()
-				},
-				{
-					label: 'TTARCH2 Archive',
-					click: notImplemented
-				}
+				}//,
+				//{
+				//	label: 'TTARCH2 Archive',
+				//	click: notImplemented
+				//}
 			]
 		},
-		conditional(projectOpen,{
-			label: 'Save',
-			click: notImplemented
-		}),
-		conditional(projectOpen, {
-			label: 'Save As',
-			click: notImplemented
-		}),
+        
+        //Mawrak Tweaks - removing unused menu buttons
+        
+		//conditional(projectOpen,{
+		//	label: 'Save',
+		//	click:  notImplemented
+                
+		//}),
+		//conditional(projectOpen, {
+		//	label: 'Save As',
+		//	click: notImplemented
+		//}),
+        
 		conditional(projectOpen, {
 			label: 'Close Project',
 			click: () => MenuCloseProjectChannel(source).send()
@@ -113,8 +127,9 @@ export const getEditorMenu = (window: BrowserWindow, state: Readonly<AppState>) 
 			label: 'Help',
 			submenu: [
 				{
+                    //Mawrak Tweaks - changed links to my fork
 					label: 'Docs',
-					click: () => shell.openExternal('https://github.com/Telltale-Modding-Group/Telltale-Script-Editor/wiki')
+					click: () => shell.openExternal('https://github.com/Mawrak/Telltale-Script-Editor-Tweaks/wiki')
 				},
 				{
 					label: 'About',
@@ -122,21 +137,21 @@ export const getEditorMenu = (window: BrowserWindow, state: Readonly<AppState>) 
 				},
 				{
 					label: 'Contribute',
-					click: () => shell.openExternal('https://github.com/Telltale-Modding-Group/Telltale-Script-Editor')
-				},
-				{
-					label: 'Debug',
-					submenu: [
-						{
-							label: 'Verbose Output',
-							click: notImplemented
-						},
-						{
-							label: 'Show Project Info',
-							click: notImplemented
-						}
-					]
-				}
+					click: () => shell.openExternal('https://github.com/Mawrak/Telltale-Script-Editor-Tweaks')
+				}//,
+				//{
+				//	label: 'Debug',
+				//	submenu: [
+				//		{
+				//			label: 'Verbose Output',
+				//			click: notImplemented
+				//		},
+				//		{
+				//			label: 'Show Project Info',
+				//			click: notImplemented
+				//		}
+				//	]
+				//}
 			]
 		}
 	].filter(item => item) as unknown as MenuItem[];

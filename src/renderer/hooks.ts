@@ -13,6 +13,7 @@ export const useBuildProject = () => {
 	const project = useAppSelector(state => state.project.currentProject);
 	const gameExePath = useAppSelector(state => state.storage.gamePath);
 	const saveFilesOnBuild = useAppSelector(state => state.storage.saveFilesOnBuild);
+    const modBuildPath2 = useAppSelector(state => state.storage.modBuildPath);
 
 	const buildProject = async () => {
 		if (!projectPath || !project) return;
@@ -50,6 +51,7 @@ export const useBuildProject = () => {
 		dispatch(SidebarActions.setActiveTab('logs'));
 
 		let gamePath = gameExePath;
+        let modBuildPath = modBuildPath2 ?? "!!Archives!!";
 
 		if (!gamePath) {
 			gamePath = await MainProcess.getGamePath();
@@ -60,7 +62,7 @@ export const useBuildProject = () => {
 		}
 
 		try {
-			await MainProcess.runProject({ projectPath, project, gamePath });
+			await MainProcess.runProject({ projectPath, project, gamePath, modBuildPath});
 		} catch {
 			showNotification({
 				title: 'Unexpected Error',

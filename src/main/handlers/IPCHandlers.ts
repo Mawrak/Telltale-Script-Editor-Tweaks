@@ -274,8 +274,16 @@ export const registerIPCHandlers = (window: BrowserWindow) => {
 		modinfo?: string
 	};
 
-	RunProjectChannel(source).handle(async ({ project, projectPath, gamePath }) => {
-		const archivesPath = path.join(path.dirname(gamePath), 'Archives');
+	RunProjectChannel(source).handle(async ({ project, projectPath, gamePath, modBuildPath }) => {
+        //Mawrak tweaks - added ability to choose mod folder
+        
+		let archivesPath = path.join(path.dirname(gamePath), 'Archives');
+        if (modBuildPath !== "!!Archives!!" && modBuildPath !== "")
+        {
+            archivesPath = modBuildPath;
+        }
+
+        
 		const cachePath = path.join(projectPath, 'Builds', 'cache');
 
 		const modInfo = await buildProject(log, state, {project, projectPath});
@@ -291,6 +299,9 @@ export const registerIPCHandlers = (window: BrowserWindow) => {
 
 		const previousModinfoFilename = previousInstall.modinfo;
 		if (previousModinfoFilename) {
+            //Mawrak Tweaks - added try-catch because this code would throw errors sometimes if the files were deleted
+            try
+            {
 			log('============== Clearing existing mod installation...');
 			const previousModInfoPath = path.join(archivesPath, previousModinfoFilename);
 			const previousModInfoContents = await fs.readFile(previousModInfoPath, 'utf8');
@@ -303,8 +314,10 @@ export const registerIPCHandlers = (window: BrowserWindow) => {
 			});
 
 			tasks.push(fs.rm(previousModInfoPath, { recursive: true }).catch());
-
+            
 			await Promise.all(tasks);
+            }
+            catch{}
 		}
 
 		log(`============== Installing mod into ${archivesPath}...`);
