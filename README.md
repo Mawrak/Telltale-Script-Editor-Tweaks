@@ -20,7 +20,7 @@ You may need to disable antivirus when installing dependencies.
 
 # Limitations
 
-- Currently, the script editor only supports The Walking Dead: The Telltale Definitive Series, however, more support is planned for future updates.
+- Currently, the script editor only supports The Walking Dead: The Telltale Definitive Series.
 - Only runs on windows as `ttarchext` is required to build ttarch2 archives.
 
 ![Editor Window](/marketing/scripteditor.png?raw=true)
