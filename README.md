@@ -28,6 +28,9 @@ You may need to disable antivirus when installing dependencies.
 # Credits
 
 Original tool was developed by:
+
 [Violet](https://github.com/droyti)
+
 [Lightning](https://twitter.com/nekoblitz_)
+
 [Ben O](https://github.com/bigbeno37)
