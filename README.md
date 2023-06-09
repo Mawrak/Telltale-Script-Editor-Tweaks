@@ -1,6 +1,6 @@
 # Telltale-Script-Editor + Tweaks
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Telltale-Modding-Group/DDS-D3DTX-Converter)](https://github.com/Mawrak/Telltale-Script-Editor-Tweaks/releases/tag/v3b.0.0)
+Latest release: https://github.com/Mawrak/Telltale-Script-Editor-Tweaks/releases/tag/v3b.0.0
 
 Original tool by Violet (droyti): https://github.com/Telltale-Modding-Group/Telltale-Script-Editor
 
