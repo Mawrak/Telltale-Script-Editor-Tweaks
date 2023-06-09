@@ -1,6 +1,6 @@
 # Telltale-Script-Editor + Tweaks
 
-[![Github All Releases](https://img.shields.io/github/downloads/Telltale-Modding-Group/Telltale-Script-Editor/total.svg?style=for-the-badge&color=blueviolet)](https://github.com/Telltale-Modding-Group/Telltale-Script-Editor/releases)
+[![GitHub release (latest by date)](https://github.com/Mawrak/Telltale-Script-Editor-Tweaks/releases)
 
 Original tool by Violet (droyti): https://github.com/Telltale-Modding-Group/Telltale-Script-Editor
 
