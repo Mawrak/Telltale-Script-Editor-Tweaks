@@ -27,7 +27,7 @@ You may need to disable antivirus when installing dependencies.
 
 # Credits
 
-Original tool was developed by:
+Original tool was developed by: 
 
 [Violet](https://github.com/droyti)
 
