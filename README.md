@@ -1,6 +1,6 @@
 # Telltale-Script-Editor + Tweaks
 
-Latest release: https://github.com/Telltale-Modding-Group/Telltale-Script-Editor-Tweaks/releases/tag/v3b.1.0
+Latest release: https://github.com/Telltale-Modding-Group/Telltale-Script-Editor-Tweaks/releases/tag/v3b.2.0
 
 Original tool by Violet (droyti): https://github.com/Telltale-Modding-Group/Telltale-Script-Editor
 
@@ -26,6 +26,14 @@ You may need to disable antivirus when installing dependencies.
 ![Editor Window](/marketing/scripteditor.png?raw=true)
 
 # Credits
+
+Mawrak
+
+Arizzble
+(aizzble on Discord)
+(https://www.youtube.com/@arizzble2005)
+
+# Credits for the original tool
 
 Original tool was developed by: 
 
