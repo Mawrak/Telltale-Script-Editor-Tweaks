@@ -10,6 +10,9 @@ import {
 	ResourceDescription
 } from './ResdescUtils';
 import crypto from 'crypto';
+import {BrowserWindow, dialog, shell, Menu} from 'electron';
+import { getFiles, getFilesInDirectory, getIPCMainChannelSource, openBuildsDirectory } from '../utils';
+
 
 const generateHash = (string: string) => {
 	const hash = crypto.createHash('md5');
@@ -28,18 +31,23 @@ type Hash = string;
 type Cache = { tseproj?: Hash } & Record<string, Record<string, Hash>>;
 export type Logger = (message: string) => void;
 
-const writeResourceDescription = async (project: Project, resdesc: ResourceDescription, cachePath: string, log: Logger) => {
+
+
+const writeResourceDescription = async (project: Project, resdesc: ResourceDescription, cachePath: string, log: Logger, gameNumber:number, PrioritySetting:number) => {
+    
+    
 	const resdescOutputPath = path.join(cachePath, generateResourceDescriptionName(project, resdesc));
 
 	await fs.mkdir(path.dirname(resdescOutputPath), {recursive: true});
-
-	await fs.writeFile(resdescOutputPath, generateResourceDescriptionContents(project, resdesc));
-	const process = exec(`resources\\ttarchext.exe -V 7 -e 0 -o 67 "${resdescOutputPath}" "${cachePath}"`, (e, out, err) => {
+    //const gameNumber = useAppSelector(state => state.storage.gameNumber);
+	await fs.writeFile(resdescOutputPath, generateResourceDescriptionContents(project, resdesc, PrioritySetting));
+	const process = exec(`resources\\ttarchext.exe -V 7 -e 0 -o ${gameNumber} "${resdescOutputPath}" "${cachePath}"`, (e, out, err) => {
 		log(out);
 		log(err);
 	});
 
 	await new Promise(resolve => process.addListener('close', resolve));
+
 };
 
 const compileLua = async (filePath: string, projectPath: string, cachePath: string, log: Logger) => {
@@ -59,10 +67,10 @@ const compileLua = async (filePath: string, projectPath: string, cachePath: stri
 	if (error) throw new Error(error);
 };
 
-export const buildProject = async (log: Logger, state: AppState, { projectPath, project }: { projectPath: string, project: Project }): Promise<ModInfo | void> => {
+export const buildProject = async (log: Logger, state: AppState, { projectPath, project}: { projectPath: string, project: Project, gameNumber: number}, gameNumber : number, PrioritySetting : number): Promise<ModInfo | void>  => {
 	const buildsPath = path.join(projectPath, 'Builds');
 	const cachePath = path.join(buildsPath, 'cache');
-
+    //const gameNumberConst = projectPath.gameNumber;
 	let previousCache: Cache;
 
 	try {
@@ -130,7 +138,7 @@ export const buildProject = async (log: Logger, state: AppState, { projectPath, 
 
 			log(`============== Generating ${resdescName}...`);
 
-			tasks.push(writeResourceDescription(project, resdesc, cachePath, log));
+			tasks.push(writeResourceDescription(project, resdesc, cachePath, log, gameNumber, PrioritySetting));
 			continue;
 		}
 
@@ -179,7 +187,7 @@ export const buildProject = async (log: Logger, state: AppState, { projectPath, 
 
 		log(`============== Generating ${ttarchFilePath} from ${archivePath}...`);
 
-		const process = exec(`resources\\ttarchext.exe -b -o 67 "${ttarchFilePath}" "${archivePath}"`, (error, stdout, stderr) => {
+		const process = exec(`resources\\ttarchext.exe -b -o ${gameNumber} "${ttarchFilePath}" "${archivePath}"`, (error, stdout, stderr) => {
 			log(stdout);
 			log(stderr);
 		});

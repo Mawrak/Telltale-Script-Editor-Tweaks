@@ -129,7 +129,7 @@ export const getEditorMenu = (window: BrowserWindow, state: Readonly<AppState>) 
 				{
                     //Mawrak Tweaks - changed links to my fork
 					label: 'Docs',
-					click: () => shell.openExternal('https://github.com/Mawrak/Telltale-Script-Editor-Tweaks/wiki')
+					click: () => shell.openExternal('https://github.com/Mawrak/Telltale-Script-Editor-Tweaks')
 				},
 				{
 					label: 'About',

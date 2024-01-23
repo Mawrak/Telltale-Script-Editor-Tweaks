@@ -8,6 +8,8 @@ import {setSelectedTheme} from '../renderer';
 
 interface StorageState {
 	initialised: boolean,
+    gameNumber: number,
+    PrioritySetting: number,
 	gamePath?: string,
     modBuildPath?: string,
 	sidebarWidth: number,
@@ -19,11 +21,13 @@ interface StorageState {
 
 const initialState: StorageState = {
 	initialised: false,
+    gameNumber: 67,
 	sidebarWidth: 250,
 	recentProjects: [],
 	maximumBuildsToKeep: 5,
 	saveFilesOnBuild: true,
-	selectedTheme: "light"
+	selectedTheme: "light",
+    PrioritySetting: 30
 };
 
 // NOTE: This is automatically synchronised with a config file on disk to persist data between application restarts.
@@ -31,6 +35,14 @@ export const StorageSlice = createSlice({
 	name: 'storage',
 	initialState,
 	reducers: {
+        //Mawrak Tweaks - new setting - Game number
+        setGameNumber: (state, {payload}: PayloadAction<number>) => {
+			state.gameNumber = payload
+		},
+        //Mawrak Tweaks - new setting - Priority
+        setPrioritySetting: (state, {payload}: PayloadAction<number>) => {
+			state.PrioritySetting = payload
+		},
 		setGamePath: (state, {payload}: PayloadAction<string | undefined>) => {
 			state.gamePath = payload
 		},
@@ -38,7 +50,6 @@ export const StorageSlice = createSlice({
         setModPath: (state, {payload}: PayloadAction<string | undefined>) => {
 			state.modBuildPath = payload
 		},
-        
 		setSidebarWidth: (state, {payload}: PayloadAction<number>) => {
 			state.sidebarWidth = Math.round(Math.max(payload, initialState.sidebarWidth));
 		},

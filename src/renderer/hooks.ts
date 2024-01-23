@@ -11,6 +11,8 @@ export const useBuildProject = () => {
 	const dispatch = useAppDispatch();
 	const projectPath = useAppSelector(state => state.filetree.root?.path);
 	const project = useAppSelector(state => state.project.currentProject);
+    const gameNumber = useAppSelector(state => state.storage.gameNumber);
+    const PrioritySetting = useAppSelector(state => state.storage.PrioritySetting);
 	const gameExePath = useAppSelector(state => state.storage.gamePath);
 	const saveFilesOnBuild = useAppSelector(state => state.storage.saveFilesOnBuild);
     const modBuildPath2 = useAppSelector(state => state.storage.modBuildPath);
@@ -22,7 +24,7 @@ export const useBuildProject = () => {
 
 		dispatch(BuildsActions.clearLogs());
 		dispatch(SidebarActions.setActiveTab('logs'));
-		const buildZipPath = await MainProcess.buildProject({ projectPath, project });
+		const buildZipPath = await MainProcess.buildProject({ projectPath, project, gameNumber, PrioritySetting });
 		dispatch(FileTreeAsyncActions.refreshRootDirectory());
 
 		if (!buildZipPath) {
@@ -62,7 +64,7 @@ export const useBuildProject = () => {
 		}
 
 		try {
-			await MainProcess.runProject({ projectPath, project, gamePath, modBuildPath});
+			await MainProcess.runProject({ projectPath, project, gamePath, modBuildPath, gameNumber, PrioritySetting});
 		} catch {
 			showNotification({
 				title: 'Unexpected Error',

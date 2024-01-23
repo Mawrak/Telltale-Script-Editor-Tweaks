@@ -63,7 +63,7 @@ export const Builds = () => {
 			</Code>
 
 			<Group position="right" p="xs">
-				<Button onClick={handleClearBuildArchives} color="red">Clear Build Archives</Button>
+				<Button onClick={handleClearBuildArchives} color="red">Clear Cached Build Archives</Button>
 				<Button onClick={handleOpenBuildsDirectory}>Open Builds Directory</Button>
 			</Group>
 		</Stack>

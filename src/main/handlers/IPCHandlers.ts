@@ -194,7 +194,7 @@ export const registerIPCHandlers = (window: BrowserWindow) => {
 	GetGamePathChannel(source).handle(async () => {
 		await dialog.showMessageBox({
 			title: 'Select executable',
-			message: 'Please select the executable file for Telltale\'s The Walking Dead: Definitive Edition',
+			message: 'Please select the executable file for the target game.',
 			type: 'warning'
 		});
 
@@ -223,12 +223,13 @@ export const registerIPCHandlers = (window: BrowserWindow) => {
 	}
 
 	BuildProjectChannel(source).handle(async data => {
-		const modInfo = await buildProject(log, state, data);
+		const modInfo = await buildProject(log, state, data, data.gameNumber, data.PrioritySetting);
 
 		if (!modInfo) return;
 
 		const buildsPath = path.join(data.projectPath, 'Builds');
 		const cachePath = path.join(buildsPath, 'cache');
+        //const gameNumberConst = data.gameNumber;
 
 		const zipFileName = `build-${format(new Date(), "yyyy-MM-dd'T'HH-mm-ss")}.zip`;
 		log(`============== Creating ${zipFileName}...`);
@@ -274,7 +275,7 @@ export const registerIPCHandlers = (window: BrowserWindow) => {
 		modinfo?: string
 	};
 
-	RunProjectChannel(source).handle(async ({ project, projectPath, gamePath, modBuildPath }) => {
+	RunProjectChannel(source).handle(async ({ project, projectPath, gamePath, modBuildPath, gameNumber, PrioritySetting }) => {
         //Mawrak tweaks - added ability to choose mod folder
         
 		let archivesPath = path.join(path.dirname(gamePath), 'Archives');
@@ -286,7 +287,7 @@ export const registerIPCHandlers = (window: BrowserWindow) => {
         
 		const cachePath = path.join(projectPath, 'Builds', 'cache');
 
-		const modInfo = await buildProject(log, state, {project, projectPath});
+		const modInfo = await buildProject(log, state, {project, projectPath, gameNumber}, gameNumber, PrioritySetting);
 
 		if (!modInfo) return;
 

@@ -39,10 +39,11 @@ export const RenameFileChannel = createInvokableChannel<{ file: EditorFile, newN
 export const DeleteFileChannel = createInvokableChannel<EditorFile, void>('deletefile');
 export const CreateFileChannel = createInvokableChannel<{ directoryPath: string, extension: string }, string>('createfile');
 export const CreateDirectoryChannel = createInvokableChannel<string, string>('createdirectory');
-export const BuildProjectChannel = createInvokableChannel<{ projectPath: string, project: Project }, string | undefined>('buildproject');
+export const BuildProjectChannel = createInvokableChannel<{ projectPath: string, project: Project, gameNumber: number, PrioritySetting: number}, string | undefined>('buildproject');
 export const GetGamePathChannel = createInvokableChannel<void, string | undefined>('getgamepath');
 export const GetLocalStoreChannel = createInvokableChannel<void, AppState["storage"]>('getlocalstore');
-export const RunProjectChannel = createInvokableChannel<{ projectPath: string, project: Project, gamePath: string, modBuildPath: string}, void>('runproject');
+export const RunProjectChannel = createInvokableChannel<{ projectPath: string, project: Project, gamePath: string, modBuildPath: string, gameNumber: number, PrioritySetting: number}, void>('runproject');
+
 
 export const OpenInExplorerChannel = createChannel<string>('openinexplorer');
 export const MenuNewProjectChannel = createChannel('menu:newproject');
